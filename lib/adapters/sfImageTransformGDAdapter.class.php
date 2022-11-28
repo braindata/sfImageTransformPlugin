@@ -242,11 +242,17 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
   public function setHolder($resource)
   {
 
+    // PHP 7.4
     if (is_resource($resource) && 'gd' === get_resource_type($resource))
     {
-
       $this->holder = $resource;
-      
+      return true;
+    }
+
+    // PHP 8.1
+    if (is_object($resource) && 'GdImage' === get_class($resource))
+    {
+      $this->holder = $resource;
       return true;
     }
 
@@ -265,7 +271,7 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
       return $this->holder;
     }
 
-    return false;
+    return null;
   }
 
   /**
@@ -275,7 +281,14 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
    */
   public function hasHolder()
   {
-    if (is_resource($this->holder) && 'gd' === get_resource_type($this->holder))
+    // PHP 7.4
+    if (is_resource($this->holder) && ('gd' === get_resource_type($this->holder)))
+    {
+      return true;
+    }
+
+    // PHP 8.1
+    if (is_object($this->holder) && ('GdImage' === get_class($this->holder)))
     {
       return true;
     }

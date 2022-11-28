@@ -16,7 +16,7 @@
  * @author   Stuart Lowes <stuart.lowes@gmail.com>
  * @version   SVN: $Id$
  */
-class sfImageTransformException extends sfException
+class sfImageTransformException extends Exception
 {
   /**
    * Class constructor.
