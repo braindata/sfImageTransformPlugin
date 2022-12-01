@@ -50,7 +50,7 @@ class sfImageResizeGeneric extends sfImageTransformAbstract
    *
    * @return void
    */
-  public function __construct($width, $height, $inflate = true, $proportional = false)
+  public function __construct($width, $height = 0, $inflate = true, $proportional = false)
   {
     $this->setWidth($width);
     $this->setHeight($height);
