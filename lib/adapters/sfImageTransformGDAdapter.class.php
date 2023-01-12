@@ -129,10 +129,17 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
   {
     $resource = imagecreatefromstring($string);
 
+    // PHP 7.4
     if (is_resource($resource) && 'gd' === get_resource_type($resource))
     {
       $this->setHolder($resource);
+      return true;
+    }
 
+    // PHP 8.1
+    if (is_object($resource) && 'GdImage' === get_class($resource))
+    {
+      $this->setHolder($resource);
       return true;
     }
 
