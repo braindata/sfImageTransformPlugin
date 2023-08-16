@@ -422,7 +422,7 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
 
         case 'image/png':
           imagesavealpha($this->holder, true);
-          $output = $this->creators[$mime]($this->holder,$file,$this->getImageSpecificQuality($this->quality, $mime), null);
+          $output = $this->creators[$mime]($this->holder,$file,$this->getImageSpecificQuality($this->quality, $mime));
           break;
 
         case 'image/gif':
