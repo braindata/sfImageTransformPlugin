@@ -127,7 +127,14 @@ class sfImageTransformGDAdapter extends sfImageTransformAdapterAbstract
    */
   public function loadString($string)
   {
+    if ($string === false || getimagesizefromstring($string) === false) {
+      throw new sfImageTransformException('Invalid or unsupported image data');
+    }
+
     $resource = imagecreatefromstring($string);
+    if ($resource === false) {
+      throw new sfImageTransformException('Failed to create image from data');
+    }
 
     // PHP 7.4
     if (is_resource($resource) && 'gd' === get_resource_type($resource))
